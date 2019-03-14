@@ -51,7 +51,9 @@ public class SqlScriptUtil {
         Scanner scanner = new Scanner(sql);
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            if (!line.startsWith("--") && !line.startsWith("GO") && !line.startsWith("USE")) {
+            if (!line.startsWith("--") && !line.startsWith("GO") && !line.startsWith("USE") &&
+            		!line.startsWith("SET DEFINE OFF")) {
+            	
                 result.append(line);
                 result.append(System.lineSeparator());
             }
