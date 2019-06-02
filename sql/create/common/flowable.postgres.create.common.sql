@@ -16,10 +16,11 @@ create table ACT_GE_BYTEARRAY (
 );
 
 insert into ACT_GE_PROPERTY
-values ('common.schema.version', '6.4.1.3', 1);
+values ('common.schema.version', '6.5.0.1', 1);
 
 insert into ACT_GE_PROPERTY
 values ('next.dbid', '1', 1);
+
 
 create table ACT_RU_ENTITYLINK (
     ID_ varchar(64),
@@ -39,7 +40,7 @@ create table ACT_RU_ENTITYLINK (
 create index ACT_IDX_ENT_LNK_SCOPE on ACT_RU_ENTITYLINK(SCOPE_ID_, SCOPE_TYPE_, LINK_TYPE_);
 create index ACT_IDX_ENT_LNK_SCOPE_DEF on ACT_RU_ENTITYLINK(SCOPE_DEFINITION_ID_, SCOPE_TYPE_, LINK_TYPE_);
 
-insert into ACT_GE_PROPERTY values ('entitylink.schema.version', '6.4.1.3', 1);
+insert into ACT_GE_PROPERTY values ('entitylink.schema.version', '6.5.0.1', 1);
 
 create table ACT_HI_ENTITYLINK (
     ID_ varchar(64),
@@ -57,6 +58,7 @@ create table ACT_HI_ENTITYLINK (
 
 create index ACT_IDX_HI_ENT_LNK_SCOPE on ACT_HI_ENTITYLINK(SCOPE_ID_, SCOPE_TYPE_, LINK_TYPE_);
 create index ACT_IDX_HI_ENT_LNK_SCOPE_DEF on ACT_HI_ENTITYLINK(SCOPE_DEFINITION_ID_, SCOPE_TYPE_, LINK_TYPE_);
+
 
 create table ACT_RU_IDENTITYLINK (
     ID_ varchar(64),
@@ -78,7 +80,7 @@ create index ACT_IDX_IDENT_LNK_GROUP on ACT_RU_IDENTITYLINK(GROUP_ID_);
 create index ACT_IDX_IDENT_LNK_SCOPE on ACT_RU_IDENTITYLINK(SCOPE_ID_, SCOPE_TYPE_);
 create index ACT_IDX_IDENT_LNK_SCOPE_DEF on ACT_RU_IDENTITYLINK(SCOPE_DEFINITION_ID_, SCOPE_TYPE_);
 
-insert into ACT_GE_PROPERTY values ('identitylink.schema.version', '6.4.1.3', 1);
+insert into ACT_GE_PROPERTY values ('identitylink.schema.version', '6.5.0.1', 1);
 
 create table ACT_HI_IDENTITYLINK (
     ID_ varchar(64),
@@ -98,6 +100,7 @@ create index ACT_IDX_HI_IDENT_LNK_USER on ACT_HI_IDENTITYLINK(USER_ID_);
 create index ACT_IDX_HI_IDENT_LNK_SCOPE on ACT_HI_IDENTITYLINK(SCOPE_ID_, SCOPE_TYPE_);
 create index ACT_IDX_HI_IDENT_LNK_SCOPE_DEF on ACT_HI_IDENTITYLINK(SCOPE_DEFINITION_ID_, SCOPE_TYPE_);
 
+
 create table ACT_RU_JOB (
     ID_ varchar(64) NOT NULL,
     REV_ integer,
@@ -108,6 +111,8 @@ create table ACT_RU_JOB (
     EXECUTION_ID_ varchar(64),
     PROCESS_INSTANCE_ID_ varchar(64),
     PROC_DEF_ID_ varchar(64),
+    ELEMENT_ID_ varchar(255),
+    ELEMENT_NAME_ varchar(255),
     SCOPE_ID_ varchar(255),
     SUB_SCOPE_ID_ varchar(255),
     SCOPE_TYPE_ varchar(255),
@@ -135,6 +140,8 @@ create table ACT_RU_TIMER_JOB (
     EXECUTION_ID_ varchar(64),
     PROCESS_INSTANCE_ID_ varchar(64),
     PROC_DEF_ID_ varchar(64),
+    ELEMENT_ID_ varchar(255),
+    ELEMENT_NAME_ varchar(255),
     SCOPE_ID_ varchar(255),
     SUB_SCOPE_ID_ varchar(255),
     SCOPE_TYPE_ varchar(255),
@@ -160,6 +167,8 @@ create table ACT_RU_SUSPENDED_JOB (
     EXECUTION_ID_ varchar(64),
     PROCESS_INSTANCE_ID_ varchar(64),
     PROC_DEF_ID_ varchar(64),
+    ELEMENT_ID_ varchar(255),
+    ELEMENT_NAME_ varchar(255),
     SCOPE_ID_ varchar(255),
     SUB_SCOPE_ID_ varchar(255),
     SCOPE_TYPE_ varchar(255),
@@ -185,6 +194,8 @@ create table ACT_RU_DEADLETTER_JOB (
     EXECUTION_ID_ varchar(64),
     PROCESS_INSTANCE_ID_ varchar(64),
     PROC_DEF_ID_ varchar(64),
+    ELEMENT_ID_ varchar(255),
+    ELEMENT_NAME_ varchar(255),
     SCOPE_ID_ varchar(255),
     SUB_SCOPE_ID_ varchar(255),
     SCOPE_TYPE_ varchar(255),
@@ -287,7 +298,7 @@ create index ACT_IDX_DJOB_SCOPE on ACT_RU_DEADLETTER_JOB(SCOPE_ID_, SCOPE_TYPE_)
 create index ACT_IDX_DJOB_SUB_SCOPE on ACT_RU_DEADLETTER_JOB(SUB_SCOPE_ID_, SCOPE_TYPE_);
 create index ACT_IDX_DJOB_SCOPE_DEF on ACT_RU_DEADLETTER_JOB(SCOPE_DEFINITION_ID_, SCOPE_TYPE_);
 
-insert into ACT_GE_PROPERTY values ('job.schema.version', '6.4.1.3', 1);
+insert into ACT_GE_PROPERTY values ('job.schema.version', '6.5.0.1', 1);
 
 create table ACT_RU_TASK (
     ID_ varchar(64),
@@ -327,7 +338,7 @@ create index ACT_IDX_TASK_SCOPE on ACT_RU_TASK(SCOPE_ID_, SCOPE_TYPE_);
 create index ACT_IDX_TASK_SUB_SCOPE on ACT_RU_TASK(SUB_SCOPE_ID_, SCOPE_TYPE_);
 create index ACT_IDX_TASK_SCOPE_DEF on ACT_RU_TASK(SCOPE_DEFINITION_ID_, SCOPE_TYPE_);
 
-insert into ACT_GE_PROPERTY values ('task.schema.version', '6.4.1.3', 1);
+insert into ACT_GE_PROPERTY values ('task.schema.version', '6.5.0.1', 1);
 
 create table ACT_HI_TASKINST (
     ID_ varchar(64) not null,
@@ -409,7 +420,8 @@ alter table ACT_RU_VARIABLE
     foreign key (BYTEARRAY_ID_) 
     references ACT_GE_BYTEARRAY (ID_);
 
-insert into ACT_GE_PROPERTY values ('variable.schema.version', '6.4.1.3', 1);
+insert into ACT_GE_PROPERTY values ('variable.schema.version', '6.5.0.1', 1);
+
 
 create table ACT_HI_VARINST (
     ID_ varchar(64) not null,
@@ -435,3 +447,28 @@ create table ACT_HI_VARINST (
 create index ACT_IDX_HI_PROCVAR_NAME_TYPE on ACT_HI_VARINST(NAME_, VAR_TYPE_);
 create index ACT_IDX_HI_VAR_SCOPE_ID_TYPE on ACT_HI_VARINST(SCOPE_ID_, SCOPE_TYPE_);
 create index ACT_IDX_HI_VAR_SUB_ID_TYPE on ACT_HI_VARINST(SUB_SCOPE_ID_, SCOPE_TYPE_);
+
+
+create table ACT_RU_EVENT_SUBSCR (
+    ID_ varchar(64) not null,
+    REV_ integer,
+    EVENT_TYPE_ varchar(255) not null,
+    EVENT_NAME_ varchar(255),
+    EXECUTION_ID_ varchar(64),
+    PROC_INST_ID_ varchar(64),
+    ACTIVITY_ID_ varchar(64),
+    CONFIGURATION_ varchar(255),
+    CREATED_ timestamp not null,
+    PROC_DEF_ID_ varchar(64),
+    SUB_SCOPE_ID_ varchar(64),
+    SCOPE_ID_ varchar(64),
+    SCOPE_DEFINITION_ID_ varchar(64),
+    SCOPE_TYPE_ varchar(64),
+    TENANT_ID_ varchar(255) default '',
+    primary key (ID_)
+);
+
+create index ACT_IDX_EVENT_SUBSCR_CONFIG_ on ACT_RU_EVENT_SUBSCR(CONFIGURATION_);
+create index ACT_IDX_EVENT_SUBSCR on ACT_RU_EVENT_SUBSCR(EXECUTION_ID_);
+
+insert into ACT_GE_PROPERTY values ('eventsubscription.schema.version', '6.5.0.1', 1);

@@ -27,6 +27,7 @@
         <module>flowable-sql-6.3.1</module>
         <module>flowable-sql-6.4.0</module>
         <module>flowable-sql-6.4.1</module>
+        <module>flowable-sql-6.5.0</module>
     </modules>
 
     <dependencies>
@@ -216,6 +217,67 @@
                         </executions>
                         <configuration>
                             <mainClass>org.flowable.sql.CombineAllSqlGenerator</mainClass>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+        	<id>updateDb</id>
+            <activation>
+                <property>
+                    <name>updateDb</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.2.1</version>
+                        <executions>
+                            <execution>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <mainClass>org.flowable.sql.UpdateDatabase</mainClass>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+        	<id>copyManualSql</id>
+            <activation>
+                <property>
+                    <name>copyManualSql</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.2.1</version>
+                        <executions>
+                            <execution>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <mainClass>org.flowable.sql.CopyManualSqlFromJarGenerator</mainClass>
+                            <arguments>
+                            	<argument>${database}</argument>
+                            	<argument>${oldVersion}</argument>
+                            	<argument>${newVersion}</argument>
+                            </arguments>
                         </configuration>
                     </plugin>
                 </plugins>
