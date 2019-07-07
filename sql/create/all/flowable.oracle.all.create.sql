@@ -473,7 +473,9 @@ create table ACT_RU_EVENT_SUBSCR (
 create index ACT_IDX_EVENT_SUBSCR_CONFIG_ on ACT_RU_EVENT_SUBSCR(CONFIGURATION_);
 create index ACT_IDX_EVENT_SUBSCR on ACT_RU_EVENT_SUBSCR(EXECUTION_ID_);
 
-insert into ACT_GE_PROPERTY values ('eventsubscription.schema.version', '6.5.0.1', 1);create table ACT_RE_DEPLOYMENT (
+insert into ACT_GE_PROPERTY values ('eventsubscription.schema.version', '6.5.0.1', 1);
+
+create table ACT_RE_DEPLOYMENT (
     ID_ NVARCHAR2(64),
     NAME_ NVARCHAR2(255),
     CATEGORY_ NVARCHAR2(255),
