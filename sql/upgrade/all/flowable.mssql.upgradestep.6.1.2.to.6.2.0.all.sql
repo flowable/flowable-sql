@@ -39,6 +39,7 @@ alter table ACT_RU_EXECUTION add CALLBACK_TYPE_ nvarchar(255);
 
 update ACT_GE_PROPERTY set VALUE_ = '6.2.0.0' where NAME_ = 'schema.version';
 
+update ACT_ID_PROPERTY set VALUE_ = '6.2.0.0' where NAME_ = 'schema.version';
 
 CREATE TABLE [ACT_CMMN_DATABASECHANGELOGLOCK] ([ID] [int] NOT NULL, [LOCKED] [bit] NOT NULL, [LOCKGRANTED] [datetime2](3), [LOCKEDBY] [nvarchar](255), CONSTRAINT [PK_ACT_CMMN_DATABASECHANGELOGLOCK] PRIMARY KEY ([ID]))
 

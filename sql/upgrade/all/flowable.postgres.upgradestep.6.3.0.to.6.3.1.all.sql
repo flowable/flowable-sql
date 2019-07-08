@@ -11,6 +11,8 @@ alter table ACT_RE_DEPLOYMENT add column PARENT_DEPLOYMENT_ID_ varchar(255);
 
 update ACT_GE_PROPERTY set VALUE_ = '6.3.1.0' where NAME_ = 'schema.version';
 
+update ACT_ID_PROPERTY set VALUE_ = '6.3.1.0' where NAME_ = 'schema.version';
+
 CREATE TABLE act_app_databasechangeloglock (ID INT NOT NULL, LOCKED BOOLEAN NOT NULL, LOCKGRANTED TIMESTAMP WITHOUT TIME ZONE, LOCKEDBY VARCHAR(255), CONSTRAINT PK_ACT_APP_DATABASECHANGELOGLOCK PRIMARY KEY (ID));
 
 DELETE FROM act_app_databasechangeloglock;

@@ -76,6 +76,7 @@ alter table ACT_RU_DEADLETTER_JOB
 update ACT_GE_PROPERTY set VALUE_ = '6.2.1.0' where NAME_ = 'job.schema.version';
 update ACT_GE_PROPERTY set VALUE_ = '6.2.1.0' where NAME_ = 'schema.version';
 
+update ACT_ID_PROPERTY set VALUE_ = '6.2.1.0' where NAME_ = 'schema.version';
 
 UPDATE ACT_CMMN_DATABASECHANGELOGLOCK SET LOCKED = 1, LOCKEDBY = '192.168.1.5 (192.168.1.5)', LOCKGRANTED = to_timestamp('2019-03-14 18:06:38.983', 'YYYY-MM-DD HH24:MI:SS.FF') WHERE ID = 1 AND LOCKED = 0;
 

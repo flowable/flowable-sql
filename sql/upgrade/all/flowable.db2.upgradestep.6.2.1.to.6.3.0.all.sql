@@ -44,6 +44,16 @@ alter table ACT_RE_PROCDEF
 
 update ACT_GE_PROPERTY set VALUE_ = '6.3.0.1' where NAME_ = 'schema.version';
 
+alter table ACT_ID_USER add TENANT_ID_ varchar(255) default '';
+
+alter table ACT_ID_PRIV alter column NAME_ set not null;
+Call Sysproc.admin_cmd ('REORG TABLE ACT_ID_PRIV');
+
+alter table ACT_ID_PRIV add constraint ACT_UNIQ_PRIV_NAME unique (NAME_);
+Call Sysproc.admin_cmd ('REORG TABLE ACT_ID_PRIV');
+
+update ACT_ID_PROPERTY set VALUE_ = '6.3.0.1' where NAME_ = 'schema.version';
+
 UPDATE ACT_CMMN_DATABASECHANGELOGLOCK SET LOCKED = 1, LOCKEDBY = '192.168.1.5 (192.168.1.5)', LOCKGRANTED = TIMESTAMP('2019-03-13 21:58:17.195') WHERE ID = 1 AND LOCKED = 0;
 
 ALTER TABLE ACT_CMMN_RU_PLAN_ITEM_INST ADD IS_COMPLETEABLE_ SMALLINT;

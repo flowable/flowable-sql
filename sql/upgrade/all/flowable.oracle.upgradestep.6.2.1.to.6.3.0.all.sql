@@ -53,6 +53,12 @@ alter table ACT_RE_PROCDEF
 
 update ACT_GE_PROPERTY set VALUE_ = '6.3.0.1' where NAME_ = 'schema.version';
 
+alter table ACT_ID_USER add TENANT_ID_ NVARCHAR2(255) default '';
+
+alter table ACT_ID_PRIV modify NAME_ not null;
+alter table ACT_ID_PRIV add constraint ACT_UNIQ_PRIV_NAME unique (NAME_);
+
+update ACT_ID_PROPERTY set VALUE_ = '6.3.0.1' where NAME_ = 'schema.version';
 
 UPDATE ACT_CMMN_DATABASECHANGELOGLOCK SET LOCKED = 1, LOCKEDBY = '192.168.1.5 (192.168.1.5)', LOCKGRANTED = to_timestamp('2019-03-14 18:06:52.149', 'YYYY-MM-DD HH24:MI:SS.FF') WHERE ID = 1 AND LOCKED = 0;
 

@@ -120,6 +120,7 @@ delete from ACT_HI_VARINST
 where VAR_TYPE_ = 'null'
 and NAME_ in ('org.activiti.engine.impl.bpmn.CURRENT_MESSAGE', 'org.flowable.engine.impl.bpmn.CURRENT_MESSAGE');
 
+update ACT_ID_PROPERTY set VALUE_ = '6.4.1.3' where NAME_ = 'schema.version';
 
 UPDATE ACT_APP_DATABASECHANGELOGLOCK SET LOCKED = 1, LOCKEDBY = '192.168.1.5 (192.168.1.5)', LOCKGRANTED = to_timestamp('2019-03-14 18:07:33.355', 'YYYY-MM-DD HH24:MI:SS.FF') WHERE ID = 1 AND LOCKED = 0;
 

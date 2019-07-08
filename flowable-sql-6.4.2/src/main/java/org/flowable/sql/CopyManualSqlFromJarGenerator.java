@@ -139,6 +139,22 @@ public class CopyManualSqlFromJarGenerator {
 		bpmnStream.close();
 		bpmnHistoryStream.close();
 		bpmnOutputStream.close();
+		
+		InputStream idmStream = CopyManualSqlFromJarGenerator.class.getClassLoader().getResourceAsStream("org/flowable/idm/db/create/flowable." + databaseName + ".create.identity.sql");
+		
+		File createIdmDir = new File("../sql/create/idm");
+    	if (!createIdmDir.exists()) {
+    		createIdmDir.mkdir();
+    	}
+    	
+    	File idmFile = new File("../sql/create/idm/flowable." + databaseName + ".create.identity.sql");
+    	if (idmFile.exists()) {
+    		idmFile.delete();
+    	}
+    	idmFile.createNewFile();
+    	
+    	BufferedOutputStream idmOutputStream = createAppendableStream(idmFile);
+		IOUtils.copy(idmStream, idmOutputStream);
     }
     
     protected static void generateUpgrade(String databaseName, String oldVersion, String newVersion) throws Exception {
@@ -201,6 +217,28 @@ public class CopyManualSqlFromJarGenerator {
 		
 		bpmnSqlStream.close();
 		bpmnOutputStream.close();
+		
+		StringBuilder idmUpgradeSqlBuilder = new StringBuilder();
+		idmUpgradeSqlBuilder.append(getIdmUpgradeSql(databaseName, dbVersions));
+		
+		File upgradeIdmDir = new File("../sql/upgrade/idm");
+    	if (!upgradeIdmDir.exists()) {
+    		upgradeIdmDir.mkdir();
+    	}
+    	
+    	File idmFile = new File("../sql/upgrade/idm/flowable." + databaseName + ".upgradestep." + oldVersion + ".to." + newVersion + ".identity.sql");
+    	if (idmFile.exists()) {
+    		idmFile.delete();
+    	}
+    	idmFile.createNewFile();
+    	
+    	ByteArrayInputStream idmSqlStream = new ByteArrayInputStream(idmUpgradeSqlBuilder.toString().getBytes(StandardCharsets.UTF_8));
+    	
+    	BufferedOutputStream idmOutputStream = createAppendableStream(idmFile);
+		IOUtils.copy(idmSqlStream, idmOutputStream);
+		
+		idmSqlStream.close();
+		idmOutputStream.close();
     }
     
     public static void joinFiles(File destination, File... sources) throws Exception {
@@ -308,6 +346,36 @@ public class CopyManualSqlFromJarGenerator {
     				sqlBuilder.append("\n");
         			sqlBuilder.append(historySqlString);
         		}
+    		}
+    	}
+    	
+    	sqlBuilder.append("\n");
+    	
+    	return sqlBuilder.toString();
+    }
+    
+    protected static String getIdmUpgradeSql(String databaseName, List<String> dbVersions) throws Exception {
+    	StringBuilder sqlBuilder = new StringBuilder();
+    	for (int i = 0; i < dbVersions.size(); i++) {
+    		String dbVersion = dbVersions.get(i);
+    		String allResourceName = "org/flowable/idm/db/upgrade/flowable.all.upgradestep." + dbVersion + ".identity.sql";
+    		
+    		String sqlString = null;
+    		if (doesSqlFileExists(allResourceName)) {
+    			sqlString = getScriptContent(allResourceName);
+    		} else {
+    			sqlString = getScriptContent("org/flowable/idm/db/upgrade/flowable." + databaseName + ".upgradestep." + dbVersion + ".identity.sql");
+    		}
+    		
+    		if ((i + 1) < dbVersions.size()) {
+    			sqlString = filterUpdatePropertyLine(sqlString);
+    		}
+    		
+    		if (sqlString.trim().length() > 0) {
+    			if (sqlBuilder.length() > 0) {
+    				sqlBuilder.append("\n");
+    			}
+    			sqlBuilder.append(sqlString);
     		}
     	}
     	

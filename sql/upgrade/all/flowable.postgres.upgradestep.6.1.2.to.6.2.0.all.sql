@@ -40,6 +40,8 @@ alter table ACT_RU_EXECUTION add column CALLBACK_TYPE_ varchar(255);
 
 update ACT_GE_PROPERTY set VALUE_ = '6.2.0.0' where NAME_ = 'schema.version';
 
+update ACT_ID_PROPERTY set VALUE_ = '6.2.0.0' where NAME_ = 'schema.version';
+
 CREATE TABLE act_cmmn_databasechangeloglock (ID INT NOT NULL, LOCKED BOOLEAN NOT NULL, LOCKGRANTED TIMESTAMP WITHOUT TIME ZONE, LOCKEDBY VARCHAR(255), CONSTRAINT PK_ACT_CMMN_DATABASECHANGELOGLOCK PRIMARY KEY (ID));
 
 DELETE FROM act_cmmn_databasechangeloglock;

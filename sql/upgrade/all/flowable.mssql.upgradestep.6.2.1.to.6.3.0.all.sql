@@ -44,6 +44,12 @@ alter table ACT_RE_PROCDEF
 
 update ACT_GE_PROPERTY set VALUE_ = '6.3.0.1' where NAME_ = 'schema.version';
 
+alter table ACT_ID_USER add TENANT_ID_ nvarchar(255) default '';
+
+alter table ACT_ID_PRIV alter column NAME_ nvarchar(255) not null;
+alter table ACT_ID_PRIV add constraint ACT_UNIQ_PRIV_NAME unique (NAME_);
+
+update ACT_ID_PROPERTY set VALUE_ = '6.3.0.1' where NAME_ = 'schema.version';
 
 UPDATE [ACT_CMMN_DATABASECHANGELOGLOCK] SET [LOCKED] = 1, [LOCKEDBY] = '192.168.1.5 (192.168.1.5)', [LOCKGRANTED] = '2019-03-13T21:42:04.039' WHERE [ID] = 1 AND [LOCKED] = 0
 

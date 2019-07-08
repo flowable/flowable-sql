@@ -117,6 +117,8 @@ delete from ACT_HI_VARINST
 where VAR_TYPE_ = 'null'
 and NAME_ in ('org.activiti.engine.impl.bpmn.CURRENT_MESSAGE', 'org.flowable.engine.impl.bpmn.CURRENT_MESSAGE');
 
+update ACT_ID_PROPERTY set VALUE_ = '6.4.1.3' where NAME_ = 'schema.version';
+
 UPDATE act_app_databasechangeloglock SET LOCKED = TRUE, LOCKEDBY = '192.168.1.5 (192.168.1.5)', LOCKGRANTED = '2019-03-13 21:24:44.346' WHERE ID = 1 AND LOCKED = FALSE;
 
 CREATE UNIQUE INDEX ACT_IDX_APP_DEF_UNIQ ON ACT_APP_APPDEF(KEY_, VERSION_, TENANT_ID_);

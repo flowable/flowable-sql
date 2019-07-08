@@ -31,6 +31,7 @@ update ACT_GE_PROPERTY set VALUE_ = '6.5.0.1' where NAME_ = 'eventsubscription.s
 
 update ACT_GE_PROPERTY set VALUE_ = '6.5.0.1' where NAME_ = 'schema.version';
 
+update ACT_ID_PROPERTY set VALUE_ = '6.5.0.1' where NAME_ = 'schema.version';
 
 UPDATE ACT_APP_DATABASECHANGELOGLOCK SET LOCKED = 1, LOCKEDBY = '192.168.10.1 (192.168.10.1)', LOCKGRANTED = '2019-06-02 20:15:47.966' WHERE ID = 1 AND LOCKED = 0;
 

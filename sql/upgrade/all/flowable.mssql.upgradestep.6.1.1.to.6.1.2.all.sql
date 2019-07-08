@@ -1,6 +1,6 @@
 update ACT_GE_PROPERTY set VALUE_ = '6.1.2.0' where NAME_ = 'schema.version';
 
-
+update ACT_ID_PROPERTY set VALUE_ = '6.1.2.0' where NAME_ = 'schema.version';
 
 UPDATE [ACT_DMN_DATABASECHANGELOGLOCK] SET [LOCKED] = 1, [LOCKEDBY] = '192.168.1.5 (192.168.1.5)', [LOCKGRANTED] = '2019-03-13T21:40:00.441' WHERE [ID] = 1 AND [LOCKED] = 0
 
