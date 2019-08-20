@@ -40,6 +40,7 @@ public class CombineAllSqlGenerator {
     	String databaseName = SqlScriptUtil.getDatabaseName(database);
     	File commonEngineFile = new File("../sql/create/common/flowable." + databaseName + ".create.common.sql");
     	File bpmnEngineFile = new File("../sql/create/bpmn/flowable." + databaseName + ".create.engine.sql");
+    	File idmEngineFile = new File("../sql/create/idm/flowable." + databaseName + ".idm-engine.create.sql");
     	File appEngineFile = new File("../sql/create/app/flowable." + databaseName + ".app-engine.create.sql");
     	File dmnEngineFile = new File("../sql/create/dmn/flowable." + databaseName + ".dmn-engine.create.sql");
     	File cmmnEngineFile = new File("../sql/create/cmmn/flowable." + databaseName + ".cmmn-engine.create.sql");
@@ -56,7 +57,7 @@ public class CombineAllSqlGenerator {
     	}
 		allFile.createNewFile();
     	
-    	joinFiles(allFile, commonEngineFile, bpmnEngineFile, appEngineFile, cmmnEngineFile, 
+    	joinFiles(allFile, commonEngineFile, bpmnEngineFile, idmEngineFile, appEngineFile, cmmnEngineFile, 
     			dmnEngineFile, formEngineFile, contentEngineFile);
     }
     

@@ -43,6 +43,7 @@ public class CombineUpgradeSqlGenerator {
     	String databaseName = SqlScriptUtil.getDatabaseName(database);
     	File commonEngineFile = new File("../sql/upgrade/common/flowable." + databaseName + ".upgradestep." + oldVersion + ".to." + newVersion + ".common.sql");
     	File bpmnEngineFile = new File("../sql/upgrade/bpmn/flowable." + databaseName + ".upgradestep." + oldVersion + ".to." + newVersion + ".engine.sql");
+    	File idmEngineFile = new File("../sql/upgrade/idm/flowable." + databaseName + ".upgradestep." + oldVersion + ".to." + newVersion + ".identity.sql");
     	File appEngineFile = new File("../sql/upgrade/app/flowable." + databaseName + ".upgradestep." + oldVersion + ".to." + newVersion + ".app.sql");
     	File dmnEngineFile = new File("../sql/upgrade/dmn/flowable." + databaseName + ".upgradestep." + oldVersion + ".to." + newVersion + ".dmn.sql");
     	File cmmnEngineFile = new File("../sql/upgrade/cmmn/flowable." + databaseName + ".upgradestep." + oldVersion + ".to." + newVersion + ".cmmn.sql");
@@ -59,8 +60,8 @@ public class CombineUpgradeSqlGenerator {
     	}
 		allFile.createNewFile();
     	
-    	joinFiles(allFile, commonEngineFile, bpmnEngineFile, appEngineFile, cmmnEngineFile, dmnEngineFile,
-    			formEngineFile, contentEngineFile);
+    	joinFiles(allFile, commonEngineFile, bpmnEngineFile, idmEngineFile, appEngineFile, cmmnEngineFile, 
+    			dmnEngineFile, formEngineFile, contentEngineFile);
     }
     
     protected static Database getDatabaseInstance() throws Exception {

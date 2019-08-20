@@ -28,6 +28,7 @@
         <module>flowable-sql-6.4.0</module>
         <module>flowable-sql-6.4.1</module>
         <module>flowable-sql-6.4.2</module>
+        <module>flowable-sql-6.5.0</module>
     </modules>
 
     <dependencies>
