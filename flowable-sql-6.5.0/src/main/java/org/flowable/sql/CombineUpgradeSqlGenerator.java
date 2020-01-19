@@ -47,6 +47,7 @@ public class CombineUpgradeSqlGenerator {
     	File appEngineFile = new File("../sql/upgrade/app/flowable." + databaseName + ".upgradestep." + oldVersion + ".to." + newVersion + ".app.sql");
     	File dmnEngineFile = new File("../sql/upgrade/dmn/flowable." + databaseName + ".upgradestep." + oldVersion + ".to." + newVersion + ".dmn.sql");
     	File cmmnEngineFile = new File("../sql/upgrade/cmmn/flowable." + databaseName + ".upgradestep." + oldVersion + ".to." + newVersion + ".cmmn.sql");
+    	File eventRegistryEngineFile = new File("../sql/upgrade/eventregistry/flowable." + databaseName + ".upgradestep." + oldVersion + ".to." + newVersion + ".eventregistry.sql");
     	File formEngineFile = new File("../sql/upgrade/form/flowable." + databaseName + ".upgradestep." + oldVersion + ".to." + newVersion + ".form.sql");
     	File contentEngineFile = new File("../sql/upgrade/content/flowable." + databaseName + ".upgradestep." + oldVersion + ".to." + newVersion + ".content.sql");
     	
@@ -61,7 +62,7 @@ public class CombineUpgradeSqlGenerator {
 		allFile.createNewFile();
     	
     	joinFiles(allFile, commonEngineFile, bpmnEngineFile, idmEngineFile, appEngineFile, cmmnEngineFile, 
-    			dmnEngineFile, formEngineFile, contentEngineFile);
+    			eventRegistryEngineFile, dmnEngineFile, formEngineFile, contentEngineFile);
     }
     
     protected static Database getDatabaseInstance() throws Exception {

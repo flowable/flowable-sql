@@ -44,6 +44,7 @@ public class CombineAllSqlGenerator {
     	File appEngineFile = new File("../sql/create/app/flowable." + databaseName + ".app-engine.create.sql");
     	File dmnEngineFile = new File("../sql/create/dmn/flowable." + databaseName + ".dmn-engine.create.sql");
     	File cmmnEngineFile = new File("../sql/create/cmmn/flowable." + databaseName + ".cmmn-engine.create.sql");
+    	File eventRegistryEngineFile = new File("../sql/create/eventregistry/flowable." + databaseName + ".eventregistry-engine.create.sql");
     	File formEngineFile = new File("../sql/create/form/flowable." + databaseName + ".form-engine.create.sql");
     	File contentEngineFile = new File("../sql/create/content/flowable." + databaseName + ".content-engine.create.sql");
     	
@@ -58,7 +59,7 @@ public class CombineAllSqlGenerator {
 		allFile.createNewFile();
     	
     	joinFiles(allFile, commonEngineFile, bpmnEngineFile, idmEngineFile, appEngineFile, cmmnEngineFile, 
-    			dmnEngineFile, formEngineFile, contentEngineFile);
+    			eventRegistryEngineFile, dmnEngineFile, formEngineFile, contentEngineFile);
     }
     
     protected static Database getDatabaseInstance() throws Exception {

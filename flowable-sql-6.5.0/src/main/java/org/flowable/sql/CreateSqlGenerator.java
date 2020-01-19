@@ -23,6 +23,8 @@ import org.flowable.content.engine.impl.db.ContentDbSchemaManager;
 import org.flowable.dmn.engine.DmnEngineConfiguration;
 import org.flowable.dmn.engine.impl.db.DmnDbSchemaManager;
 import org.flowable.engine.ProcessEngineConfiguration;
+import org.flowable.eventregistry.impl.EventRegistryEngineConfiguration;
+import org.flowable.eventregistry.impl.db.EventDbSchemaManager;
 import org.flowable.form.engine.FormEngineConfiguration;
 import org.flowable.form.engine.impl.db.FormDbSchemaManager;
 
@@ -41,6 +43,7 @@ public class CreateSqlGenerator {
     	
     	generateAppEngineCreateSql();
     	generateCmmnEngineCreateSql();
+    	generateEventRegistryEngineCreateSql();
     	generateDmnEngineCreateSql();
     	generateFormEngineCreateSql();
     	generateContentEngineCreateSql();
@@ -60,6 +63,14 @@ public class CreateSqlGenerator {
         database.setDatabaseChangeLogLockTableName(CmmnEngineConfiguration.LIQUIBASE_CHANGELOG_PREFIX + database.getDatabaseChangeLogLockTableName());
     	Liquibase liquibase = new Liquibase(CmmnDbSchemaManager.LIQUIBASE_CHANGELOG, new ClassLoaderResourceAccessor(), database);
     	SqlScriptUtil.generateCreateSqlFile(liquibase, database, "cmmn");
+    }
+    
+    protected static void generateEventRegistryEngineCreateSql() throws Exception {
+    	Database database = getDatabaseInstance();
+    	database.setDatabaseChangeLogTableName(EventRegistryEngineConfiguration.LIQUIBASE_CHANGELOG_PREFIX + database.getDatabaseChangeLogTableName());
+        database.setDatabaseChangeLogLockTableName(EventRegistryEngineConfiguration.LIQUIBASE_CHANGELOG_PREFIX + database.getDatabaseChangeLogLockTableName());
+    	Liquibase liquibase = new Liquibase(EventDbSchemaManager.LIQUIBASE_CHANGELOG, new ClassLoaderResourceAccessor(), database);
+    	SqlScriptUtil.generateCreateSqlFile(liquibase, database, "eventregistry");
     }
     
     protected static void generateDmnEngineCreateSql() throws Exception {
