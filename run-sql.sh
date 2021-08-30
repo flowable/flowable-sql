@@ -8,7 +8,7 @@ else
 	DATABASE=$1
     echo "Database type: $DATABASE"
     
-    cd flowable-sql-6.5.0
+    cd flowable-sql-6.6.0
     if [[ "$DATABASE" == "oracle" ]] ; then
     	mvn -PupdateDb -Ddatabasewithschema=$DATABASE -Duser.timezone=GMT clean install
     else
@@ -17,17 +17,17 @@ else
     
     cd ..
     
-    cd flowable-sql-6.6.0
+    cd flowable-sql-6.7.0
     if [[ "$DATABASE" == "oracle" ]] ; then
-    	mvn -PgenerateSql -Ddatabasewithschema=$DATABASE -Duser.timezone=GMT -DoldVersion=6.5.0 -DnewVersion=6.6.0 clean install
+    	mvn -PgenerateSql -Ddatabasewithschema=$DATABASE -Duser.timezone=GMT -DoldVersion=6.6.0 -DnewVersion=6.7.0 clean install
     	mvn -PgenerateCreateSql -Ddatabasewithschema=$DATABASE -Duser.timezone=GMT clean install
-    	mvn -PcombineUpgradeSql -Ddatabasewithschema=$DATABASE -Duser.timezone=GMT -DoldVersion=6.5.0 -DnewVersion=6.6.0 clean install
+    	mvn -PcombineUpgradeSql -Ddatabasewithschema=$DATABASE -Duser.timezone=GMT -DoldVersion=6.6.0 -DnewVersion=6.7.0 clean install
     	mvn -PcombineCreateSql -Ddatabasewithschema=$DATABASE -Duser.timezone=GMT clean install
     	mvn -PdropAll -Ddatabasewithschema=$DATABASE -Duser.timezone=GMT clean install
     else
-    	mvn -PgenerateSql -Ddatabase=$DATABASE -DoldVersion=6.5.0 -DnewVersion=6.6.0 clean install
+    	mvn -PgenerateSql -Ddatabase=$DATABASE -DoldVersion=6.6.0 -DnewVersion=6.7.0 clean install
     	mvn -PgenerateCreateSql -Ddatabase=$DATABASE clean install
-    	mvn -PcombineUpgradeSql -Ddatabase=$DATABASE -DoldVersion=6.5.0 -DnewVersion=6.6.0 clean install
+    	mvn -PcombineUpgradeSql -Ddatabase=$DATABASE -DoldVersion=6.6.0 -DnewVersion=6.7.0 clean install
     	mvn -PcombineCreateSql -Ddatabase=$DATABASE clean install
     	mvn -PdropAll -Ddatabase=$DATABASE clean install
     fi

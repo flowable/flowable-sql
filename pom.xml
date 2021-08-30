@@ -11,7 +11,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <liquibase.version>3.5.3</liquibase.version>
+        <liquibase.version>4.3.5</liquibase.version>
     </properties>
 
     <modules>
@@ -30,6 +30,7 @@
         <module>flowable-sql-6.4.2</module>
         <module>flowable-sql-6.5.0</module>
         <module>flowable-sql-6.6.0</module>
+        <module>flowable-sql-6.7.0</module>
     </modules>
 
     <dependencies>
@@ -64,10 +65,16 @@
             <version>10.1</version>
         </dependency>
         <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-core</artifactId>
-            <version>${liquibase.version}</version>
-        </dependency>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-core</artifactId>
+				<version>${liquibase.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>javax.xml.bind</groupId>
+						<artifactId>jaxb-api</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
         <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
