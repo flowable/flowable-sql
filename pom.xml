@@ -32,6 +32,7 @@
         <module>flowable-sql-6.6.0</module>
         <module>flowable-sql-6.7.0</module>
         <module>flowable-sql-6.7.1</module>
+        <module>flowable-sql-6.7.2</module>
     </modules>
 
     <dependencies>
