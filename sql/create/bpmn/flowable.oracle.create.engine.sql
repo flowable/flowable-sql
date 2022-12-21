@@ -348,10 +348,10 @@ alter table ACT_PROCDEF_INFO
     unique (PROC_DEF_ID_);
 
 insert into ACT_GE_PROPERTY
-values ('schema.version', '6.7.2.0', 1);
+values ('schema.version', '6.8.0.0', 1);
 
 insert into ACT_GE_PROPERTY
-values ('schema.history', 'create(6.7.2.0)', 1);
+values ('schema.history', 'create(6.8.0.0)', 1);
 
 create table ACT_HI_PROCINST (
     ID_ NVARCHAR2(64) not null,
@@ -449,6 +449,7 @@ create table ACT_HI_ATTACHMENT (
 
 create index ACT_IDX_HI_PRO_INST_END on ACT_HI_PROCINST(END_TIME_);
 create index ACT_IDX_HI_PRO_I_BUSKEY on ACT_HI_PROCINST(BUSINESS_KEY_);
+create index ACT_IDX_HI_PRO_SUPER_PROCINST on ACT_HI_PROCINST(SUPER_PROCESS_INSTANCE_ID_);
 create index ACT_IDX_HI_ACT_INST_START on ACT_HI_ACTINST(START_TIME_);
 create index ACT_IDX_HI_ACT_INST_END on ACT_HI_ACTINST(END_TIME_);
 create index ACT_IDX_HI_DETAIL_PROC_INST on ACT_HI_DETAIL(PROC_INST_ID_);
