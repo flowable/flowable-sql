@@ -24,37 +24,37 @@
 		<dependency>
 			<groupId>org.flowable</groupId>
 			<artifactId>flowable-app-engine</artifactId>
-			<version>6.8.0-SNAPSHOT</version>
+			<version>6.8.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.flowable</groupId>
 			<artifactId>flowable-engine</artifactId>
-			<version>6.8.0-SNAPSHOT</version>
+			<version>6.8.0</version>
 		</dependency>
         <dependency>
             <groupId>org.flowable</groupId>
             <artifactId>flowable-cmmn-engine</artifactId>
-            <version>6.8.0-SNAPSHOT</version>
+            <version>6.8.0</version>
         </dependency>
         <dependency>
             <groupId>org.flowable</groupId>
             <artifactId>flowable-event-registry</artifactId>
-            <version>6.8.0-SNAPSHOT</version>
+            <version>6.8.0</version>
         </dependency>
         <dependency>
             <groupId>org.flowable</groupId>
             <artifactId>flowable-dmn-engine</artifactId>
-            <version>6.8.0-SNAPSHOT</version>
+            <version>6.8.0</version>
         </dependency>
         <dependency>
             <groupId>org.flowable</groupId>
             <artifactId>flowable-form-engine</artifactId>
-            <version>6.8.0-SNAPSHOT</version>
+            <version>6.8.0</version>
         </dependency>
         <dependency>
             <groupId>org.flowable</groupId>
             <artifactId>flowable-content-engine</artifactId>
-            <version>6.8.0-SNAPSHOT</version>
+            <version>6.8.0</version>
         </dependency>
 
 	</dependencies>
