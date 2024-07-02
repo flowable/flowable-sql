@@ -13,10 +13,8 @@
 package org.flowable.sql;
 
 import org.flowable.common.sql.SqlScriptUtil;
-import org.flowable.content.engine.ContentEngineConfiguration;
 import org.flowable.dmn.engine.DmnEngineConfiguration;
 import org.flowable.engine.ProcessEngineConfiguration;
-import org.flowable.form.engine.FormEngineConfiguration;
 
 import liquibase.Liquibase;
 import liquibase.database.Database;
@@ -31,8 +29,6 @@ public class SqlGenerator {
     	String newVersion = args[1];
     	
     	generateDmnEngineUpgradeSql(oldVersion, newVersion);
-    	generateFormEngineUpgradeSql(oldVersion, newVersion);
-    	generateContentEngineUpgradeSql(oldVersion, newVersion);
     }
     
     protected static void generateDmnEngineUpgradeSql(String oldVersion, String newVersion) throws Exception {
@@ -41,22 +37,6 @@ public class SqlGenerator {
         database.setDatabaseChangeLogLockTableName(DmnEngineConfiguration.LIQUIBASE_CHANGELOG_PREFIX + database.getDatabaseChangeLogLockTableName());
     	Liquibase liquibase = new Liquibase("org/flowable/dmn/db/liquibase/flowable-dmn-db-changelog.xml", new ClassLoaderResourceAccessor(), database);
     	SqlScriptUtil.generateUpgradeSqlFile(liquibase, database, oldVersion + ".to." + newVersion, "dmn");
-    }
-    
-    protected static void generateFormEngineUpgradeSql(String oldVersion, String newVersion) throws Exception {
-    	Database database = getDatabaseInstance();
-    	database.setDatabaseChangeLogTableName(FormEngineConfiguration.LIQUIBASE_CHANGELOG_PREFIX + database.getDatabaseChangeLogTableName());
-        database.setDatabaseChangeLogLockTableName(FormEngineConfiguration.LIQUIBASE_CHANGELOG_PREFIX + database.getDatabaseChangeLogLockTableName());
-    	Liquibase liquibase = new Liquibase("org/flowable/form/db/liquibase/flowable-form-db-changelog.xml", new ClassLoaderResourceAccessor(), database);
-    	SqlScriptUtil.generateUpgradeSqlFile(liquibase, database, oldVersion + ".to." + newVersion, "form");
-    }
-    
-    protected static void generateContentEngineUpgradeSql(String oldVersion, String newVersion) throws Exception {
-    	Database database = getDatabaseInstance();
-    	database.setDatabaseChangeLogTableName(ContentEngineConfiguration.LIQUIBASE_CHANGELOG_PREFIX + database.getDatabaseChangeLogTableName());
-        database.setDatabaseChangeLogLockTableName(ContentEngineConfiguration.LIQUIBASE_CHANGELOG_PREFIX + database.getDatabaseChangeLogLockTableName());
-    	Liquibase liquibase = new Liquibase("org/flowable/content/db/liquibase/flowable-content-db-changelog.xml", new ClassLoaderResourceAccessor(), database);
-    	SqlScriptUtil.generateUpgradeSqlFile(liquibase, database, oldVersion + ".to." + newVersion, "content");
     }
     
     protected static Database getDatabaseInstance() throws Exception {

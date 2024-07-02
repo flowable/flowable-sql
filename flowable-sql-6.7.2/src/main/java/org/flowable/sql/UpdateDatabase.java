@@ -17,21 +17,18 @@ import org.flowable.app.engine.impl.db.AppDbSchemaManager;
 import org.flowable.cmmn.engine.CmmnEngineConfiguration;
 import org.flowable.cmmn.engine.impl.db.CmmnDbSchemaManager;
 import org.flowable.common.sql.DbDropUtil;
-import org.flowable.content.engine.ContentEngineConfiguration;
-import org.flowable.content.engine.impl.db.ContentDbSchemaManager;
 import org.flowable.dmn.engine.DmnEngineConfiguration;
 import org.flowable.dmn.engine.impl.db.DmnDbSchemaManager;
 import org.flowable.engine.ProcessEngineConfiguration;
 import org.flowable.eventregistry.impl.EventRegistryEngineConfiguration;
 import org.flowable.eventregistry.impl.db.EventDbSchemaManager;
-import org.flowable.form.engine.FormEngineConfiguration;
-import org.flowable.form.engine.impl.db.FormDbSchemaManager;
 
 import liquibase.Liquibase;
 import liquibase.database.Database;
 import liquibase.database.DatabaseConnection;
 import liquibase.database.DatabaseFactory;
 import liquibase.resource.ClassLoaderResourceAccessor;
+import liquibase.resource.SearchPathResourceAccessor;
 
 public class UpdateDatabase {
 
@@ -44,8 +41,6 @@ public class UpdateDatabase {
     	updateCmmnEngine();
     	updateEventRegistryEngine();
     	updateDmnEngine();
-    	updateFormEngine();
-    	updateContentEngine();
     }
     
     protected static void updateAppEngine() throws Exception {
@@ -76,24 +71,8 @@ public class UpdateDatabase {
     	Database database = getDatabaseInstance();
     	database.setDatabaseChangeLogTableName(DmnEngineConfiguration.LIQUIBASE_CHANGELOG_PREFIX + database.getDatabaseChangeLogTableName());
         database.setDatabaseChangeLogLockTableName(DmnEngineConfiguration.LIQUIBASE_CHANGELOG_PREFIX + database.getDatabaseChangeLogLockTableName());
-    	Liquibase liquibase = new Liquibase(DmnDbSchemaManager.LIQUIBASE_CHANGELOG, new ClassLoaderResourceAccessor(), database);
+    	Liquibase liquibase = new Liquibase(DmnDbSchemaManager.LIQUIBASE_CHANGELOG, new SearchPathResourceAccessor("./src/main/resources"), database);
     	liquibase.update("dmn");
-    }
-    
-    protected static void updateFormEngine() throws Exception {
-    	Database database = getDatabaseInstance();
-    	database.setDatabaseChangeLogTableName(FormEngineConfiguration.LIQUIBASE_CHANGELOG_PREFIX + database.getDatabaseChangeLogTableName());
-        database.setDatabaseChangeLogLockTableName(FormEngineConfiguration.LIQUIBASE_CHANGELOG_PREFIX + database.getDatabaseChangeLogLockTableName());
-    	Liquibase liquibase = new Liquibase(FormDbSchemaManager.LIQUIBASE_CHANGELOG, new ClassLoaderResourceAccessor(), database);
-    	liquibase.update("form");
-    }
-    
-    protected static void updateContentEngine() throws Exception {
-    	Database database = getDatabaseInstance();
-    	database.setDatabaseChangeLogTableName(ContentEngineConfiguration.LIQUIBASE_CHANGELOG_PREFIX + database.getDatabaseChangeLogTableName());
-        database.setDatabaseChangeLogLockTableName(ContentEngineConfiguration.LIQUIBASE_CHANGELOG_PREFIX + database.getDatabaseChangeLogLockTableName());
-    	Liquibase liquibase = new Liquibase(ContentDbSchemaManager.LIQUIBASE_CHANGELOG, new ClassLoaderResourceAccessor(), database);
-    	liquibase.update("content");
     }
     
     protected static Database getDatabaseInstance() throws Exception {

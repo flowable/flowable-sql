@@ -11,7 +11,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <liquibase.version>4.3.5</liquibase.version>
+        <liquibase.version>4.27.0</liquibase.version>
     </properties>
 
     <modules>
@@ -35,6 +35,9 @@
         <module>flowable-sql-6.7.2</module>
         <module>flowable-sql-6.8.0</module>
         <module>flowable-sql-6.8.1</module>
+        <module>flowable-sql-7.0.0</module>
+        <module>flowable-sql-7.0.1</module>
+        <module>flowable-sql-7.1.0</module>
     </modules>
 
     <dependencies>
@@ -290,6 +293,68 @@
                             	<argument>${database}</argument>
                             	<argument>${oldVersion}</argument>
                             	<argument>${newVersion}</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+        	<id>copyUpgradeSql</id>
+            <activation>
+                <property>
+                    <name>copyUpgradeSql</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.2.1</version>
+                        <executions>
+                            <execution>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <mainClass>org.flowable.sql.CopyUpgradeSqlFromJarGenerator</mainClass>
+                            <arguments>
+                            	<argument>${database}</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+        	<id>copyDropSql</id>
+            <activation>
+                <property>
+                    <name>copyDropSql</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.2.1</version>
+                        <executions>
+                            <execution>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <mainClass>org.flowable.sql.CopyDropSqlFromJarGenerator</mainClass>
+                            <arguments>
+                            	<argument>${database}</argument>
                             </arguments>
                         </configuration>
                     </plugin>
