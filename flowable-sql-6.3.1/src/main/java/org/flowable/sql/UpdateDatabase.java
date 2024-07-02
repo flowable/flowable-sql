@@ -12,6 +12,8 @@
  */
 package org.flowable.sql;
 
+import org.flowable.app.engine.AppEngineConfiguration;
+import org.flowable.app.engine.impl.db.AppDbSchemaManager;
 import org.flowable.cmmn.engine.CmmnEngineConfiguration;
 import org.flowable.cmmn.engine.impl.db.CmmnDbSchemaManager;
 import org.flowable.common.sql.DbDropUtil;
@@ -33,8 +35,17 @@ public class UpdateDatabase {
     	DbDropUtil.dropDatabaseTable(engineConfiguration.getJdbcDriver(), engineConfiguration.getJdbcUrl(), 
     			engineConfiguration.getJdbcUsername(), engineConfiguration.getJdbcPassword());
     	
+    	updateAppEngine();
     	updateCmmnEngine();
     	updateDmnEngine();
+    }
+    
+    protected static void updateAppEngine() throws Exception {
+    	Database database = getDatabaseInstance();
+    	database.setDatabaseChangeLogTableName(AppEngineConfiguration.LIQUIBASE_CHANGELOG_PREFIX + database.getDatabaseChangeLogTableName());
+        database.setDatabaseChangeLogLockTableName(AppEngineConfiguration.LIQUIBASE_CHANGELOG_PREFIX + database.getDatabaseChangeLogLockTableName());
+    	Liquibase liquibase = new Liquibase(AppDbSchemaManager.LIQUIBASE_CHANGELOG, new ClassLoaderResourceAccessor(), database);
+    	liquibase.update("app");
     }
     
     protected static void updateCmmnEngine() throws Exception {
