@@ -38,6 +38,7 @@
         <module>flowable-sql-7.0.0</module>
         <module>flowable-sql-7.0.1</module>
         <module>flowable-sql-7.1.0</module>
+        <module>flowable-sql-generator</module>
     </modules>
 
     <dependencies>
