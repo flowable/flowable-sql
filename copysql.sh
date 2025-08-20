@@ -8,6 +8,6 @@ else
 	DATABASE=$1
     echo "Database type: $DATABASE"
     
-    cd flowable-sql-6.5.0
-    mvn -PcopyManualSql -Ddatabase=$DATABASE -DoldVersion=6.4.1 -DnewVersion=6.5.0 clean install
+    cd flowable-sql-7.1.0
+    mvn -PcopyManualSql -Ddatabase=$DATABASE clean install
 fi

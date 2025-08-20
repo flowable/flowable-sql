@@ -291,8 +291,6 @@
                             <mainClass>org.flowable.sql.CopyManualSqlFromJarGenerator</mainClass>
                             <arguments>
                             	<argument>${database}</argument>
-                            	<argument>${oldVersion}</argument>
-                            	<argument>${newVersion}</argument>
                             </arguments>
                         </configuration>
                     </plugin>
