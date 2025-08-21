@@ -59,6 +59,9 @@ update ACT_ID_PROPERTY set VALUE_ = '7.2.0.1' where NAME_ = 'schema.version';
 update ACT_GE_PROPERTY set VALUE_ = '7.2.0.2' where NAME_ = 'common.schema.version';
 
 
+update ACT_GE_PROPERTY set VALUE_ = '7.2.0.2' where NAME_ = 'schema.version';
+
+
 update ACT_GE_PROPERTY set VALUE_ = '7.2.0.2' where NAME_ = 'app.schema.version';
 
 
